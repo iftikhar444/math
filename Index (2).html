@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Math MCQ Practice</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{min-height:100vh;background:#07070e;font-family:'Segoe UI',system-ui,sans-serif;color:#e8e8f0}
+.wrap{min-height:100vh;padding:0}
+.ctn{max-width:720px;margin:0 auto;padding:24px 16px}
+h1{font-size:28px;font-weight:700;color:#f0f0ff;letter-spacing:-0.5px;margin-bottom:4px}
+.sub{font-size:13px;color:#6b6b88;margin-bottom:32px}
+.lbl{font-size:11px;font-weight:600;color:#6b6b88;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;display:block}
+select{width:100%;background:#10101e;border:1px solid #252540;border-radius:8px;color:#e8e8f0;padding:10px 14px;font-size:14px;margin-bottom:20px;cursor:pointer;outline:none}
+.trow{display:flex;align-items:center;gap:10px;margin-bottom:28px}
+.tbtn{width:40px;height:22px;border-radius:11px;border:none;cursor:pointer;position:relative;transition:background .2s;flex-shrink:0}
+.tbtn.off{background:#252540}.tbtn.on{background:#7c5af0}
+.tknob{width:16px;height:16px;border-radius:50%;background:#fff;position:absolute;top:3px;left:3px;transition:left .2s}
+.tbtn.on .tknob{left:21px}
+.tlbl{font-size:13px;color:#a0a0c0}
+.btn{background:linear-gradient(135deg,#7c5af0,#5a6ef0);border:none;border-radius:10px;color:#fff;font-weight:600;font-size:15px;padding:12px 28px;cursor:pointer;width:100%}
+.btnPri{background:linear-gradient(135deg,#7c5af0,#5a6ef0);border:none;border-radius:8px;color:#fff;font-weight:600;font-size:13px;padding:9px 20px;cursor:pointer}
+.btnSm{background:#1a1a30;border:1px solid #252540;border-radius:8px;color:#a0a0c0;font-size:12px;padding:6px 14px;cursor:pointer}
+.chGrid{margin-top:32px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.chCard{background:#0e0e1e;border:1px solid #1a1a30;border-radius:8px;padding:10px 12px;cursor:pointer;transition:border .15s}
+.chCard.active{border:1px solid #7c5af0}
+.chCard .chId{font-size:10px;color:#7c5af0;font-weight:700;margin-bottom:2px}
+.chCard .chCnt{font-size:11px;color:#6b6b88}
+.topRow{display:flex;justifyContent:space-between;alignItems:center;margin-bottom:20px}
+.counter{font-size:12px;color:#6b6b88}
+.tag{font-size:11px;color:#7c5af0;background:#1a1530;padding:3px 10px;border-radius:20px;font-weight:600}
+.bar{height:3px;background:#1a1a30;border-radius:4px;margin-bottom:28px;overflow:hidden}
+.barFill{height:100%;background:linear-gradient(90deg,#7c5af0,#5a6ef0);border-radius:4px;transition:width .3s}
+.qLabel{margin-bottom:8px;font-size:11px;color:#5a5a78;letter-spacing:0.05em}
+.qText{font-size:17px;font-weight:600;color:#f0f0ff;line-height:1.5;margin-bottom:24px;letter-spacing:-0.2px}
+.opt{display:block;width:100%;text-align:left;padding:13px 16px;margin-bottom:10px;border-radius:10px;border:1px solid #1e1e38;font-size:14px;font-weight:500;cursor:pointer;transition:all .15s;line-height:1.4;background:#0e0e1e;color:#c0c0e0}
+.opt:hover{border-color:#3a3a60}
+.opt.correct{background:#0d2b1a;border-color:#2a7a4a;color:#5af0a0}
+.opt.wrong{background:#2b0d1a;border-color:#7a2a3a;color:#f05080}
+.opt.reveal{background:#0a1628;border-color:#2a4a7a;color:#6090d8}
+.optL{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:6px;margin-right:10px;font-size:12px;font-weight:700;flex-shrink:0;vertical-align:middle;background:#1e1e38;color:#6b6b88}
+.opt.correct .optL{background:#2a7a4a;color:#fff}
+.opt.wrong .optL{background:#7a2a3a;color:#fff}
+.opt.reveal .optL{background:#2a4a7a;color:#fff}
+.expBox{background:#0a0a18;border:1px solid #1e2040;border-radius:10px;padding:14px 16px;margin-top:4px;margin-bottom:20px}
+.expLabel{font-size:10px;font-weight:700;color:#7c5af0;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px}
+.expText{font-size:13px;color:#a0a0c4;line-height:1.6}
+.resultCard{background:#0e0e1e;border:1px solid #1e1e38;border-radius:16px;padding:32px 24px;text-align:center;margin-bottom:24px}
+.bigScore{font-size:56px;font-weight:700;color:#7c5af0;line-height:1}
+.pctBar{height:6px;background:#1a1a30;border-radius:4px;margin:20px 0;overflow:hidden}
+.pctFill{height:100%;border-radius:4px;transition:width 1s}
+.row{display:flex;gap:10px;margin-top:4px}
+.statBox{flex:1;background:#0e0e1e;border:1px solid #1e1e38;border-radius:10px;padding:16px;text-align:center}
+.statNum{font-size:24px;font-weight:700;margin-bottom:2px}
+.sectionTitle{font-size:16px;font-weight:700;color:#f0f0ff;margin-bottom:16px;margin-top:8px}
+.wrongCard{background:#0e0e1e;border:1px solid #1e1e38;border-radius:12px;padding:20px;margin-bottom:14px}
+.wrongQ{font-size:14px;font-weight:600;color:#f0f0ff;margin-bottom:12px;line-height:1.4}
+.wrongCh{font-size:12px;color:#f05080;margin-bottom:4px}
+.wrongCr{font-size:12px;color:#5af0a0;margin-bottom:10px}
+.wrongEx{font-size:12px;color:#8080a0;line-height:1.5;border-top:1px solid #1e1e38;padding-top:10px;margin-top:6px}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="ctn" id="app"></div>
+</div>
+<script>
+var MCQ_DATA=[
+{id:1,ch:1,chName:"Ch.1 Functions & Limits",q:"A function f(x) = x² + 2x + 3 is:",opts:["Odd","Even","Implicit","Explicit"],ans:3,exp:"f(x) = x²+2x+3 is Explicit \u2014 y is directly written in terms of x."},
+{id:2,ch:1,chName:"Ch.1 Functions & Limits",q:"Which one is a periodic function?",opts:["x² + 1","2x","sin x","x³ + 1"],ans:2,exp:"sin x repeats every 2\u03c0 (period = 2\u03c0)."},
+{id:3,ch:1,chName:"Ch.1 Functions & Limits",q:"Given f(x) = 1/x \u2212 1, then f(2) =",opts:["1","2","\u22121/2","3"],ans:2,exp:"f(2) = 1/2 \u2212 1 = \u22120.5 = \u22121/2."},
+{id:4,ch:1,chName:"Ch.1 Functions & Limits",q:"If f(x) = 3\u02e3 \u2212 11, then f(3) =",opts:["27","8","26","16"],ans:3,exp:"f(3) = 3\u00b3 \u2212 11 = 27 \u2212 11 = 16."},
+{id:5,ch:1,chName:"Ch.1 Functions & Limits",q:"lim x\u21920 (1 + x)^(1/x) =",opts:["0","1","e","e\u00b2"],ans:2,exp:"This is the definition of Euler\u2019s number e \u2248 2.718."},
+{id:6,ch:1,chName:"Ch.1 Functions & Limits",q:"lim x\u21922 (x \u2212 1) =",opts:["1","2","3","4"],ans:0,exp:"Direct substitution: 2\u22121 = 1."},
+{id:7,ch:1,chName:"Ch.1 Functions & Limits",q:"lim x\u21922 (cx) =",opts:["2c","c","xc","x"],ans:0,exp:"Direct substitution: c\u00b72 = 2c."},
+{id:8,ch:1,chName:"Ch.1 Functions & Limits",q:"lim x\u2192\u03c0/6 (cos x) =",opts:["\u221a3/2","1/2","0","1/\u221a2"],ans:0,exp:"cos(\u03c0/6) = cos(30\u00b0) = \u221a3/2."},
+{id:9,ch:1,chName:"Ch.1 Functions & Limits",q:"lim \u03b8\u2192\u03c0/2 (sin \u03b8 / \u03b8) =",opts:["1","\u03c0/2","2/\u03c0","1/2"],ans:2,exp:"sin(\u03c0/2)=1, so 1\u00f7(\u03c0/2) = 2/\u03c0."},
+{id:10,ch:1,chName:"Ch.1 Functions & Limits",q:"lim \u03b8\u2192\u03c0/2 (1 / cos \u03b8) =",opts:["0","\u221e","1","2/\u03c0"],ans:1,exp:"cos(\u03c0/2)=0, so 1/0 \u2192 \u221e."},
+{id:11,ch:2,chName:"Ch.2 Derivatives",q:"d/dx (2x + 3)\u2074 =",opts:["8(2x+3)\u00b3","4(2x+3)\u00b3","(2x+3)\u00b3","4(2x+3)\u00b2"],ans:0,exp:"Chain rule: 4\u00b7(2x+3)\u00b3\u00b72 = 8(2x+3)\u00b3."},
+{id:12,ch:2,chName:"Ch.2 Derivatives",q:"d/dx (1/x) =",opts:["1/x\u00b2","\u22121/x\u00b2","\u22121/x\u00b3","2/x"],ans:1,exp:"x\u207b\u00b9, power rule: \u22121\u00b7x\u207b\u00b2 = \u22121/x\u00b2."},
+{id:13,ch:2,chName:"Ch.2 Derivatives",q:"mx^(m\u22121) is the derivative of:",opts:["m(m\u22121)x^(m\u22122)","(m\u22121)x^(m\u22122)","x\u1d50","mx\u1d50"],ans:2,exp:"d/dx(x\u1d50) = m\u00b7x^(m\u22121)."},
+{id:14,ch:2,chName:"Ch.2 Derivatives",q:"d/dx (ax + b)\u00b2 =",opts:["2(ax+b)","2a(ax+b)","(ax+b)\u00b3/3","2(ax+b)b"],ans:1,exp:"Chain rule: 2(ax+b)\u00b7a = 2a(ax+b)."},
+{id:15,ch:2,chName:"Ch.2 Derivatives",q:"Second derivative of x\u00b2 is:",opts:["2","Zero","2x","x"],ans:0,exp:"d/dx(x\u00b2)=2x, d/dx(2x)=2."},
+{id:16,ch:2,chName:"Ch.2 Derivatives",q:"lim \u03b4y/\u03b4x (as \u03b4x\u21920) is denoted by:",opts:["dy/dx","\u222bdx","y","D\u00b2y"],ans:0,exp:"The limit of \u03b4y/\u03b4x as \u03b4x\u21920 is the derivative dy/dx."},
+{id:17,ch:2,chName:"Ch.2 Derivatives",q:"dy/dx of \u221a(1 + x) =",opts:["1/\u221a(1+x)","1/[2\u221a(1+x)]","(1+x)^(1/3)","\u22121/[2\u221a(1+x)]"],ans:1,exp:"(1+x)^(1/2), derivative = (1/2)(1+x)^(\u22121/2) = 1/[2\u221a(1+x)]."},
+{id:18,ch:2,chName:"Ch.2 Derivatives",q:"If u = t\u00b2 \u2212 3, then du/dt =",opts:["2t","2t\u22123","t\u207b\u00b2","2t\u207b\u00b2"],ans:0,exp:"d/dt(t\u00b2\u22123) = 2t."},
+{id:19,ch:2,chName:"Ch.2 Derivatives",q:"If y = u\u00b2 and u = x, then dy/dx =",opts:["2x","u\u00b2","x","2x\u00b2"],ans:0,exp:"Chain rule: 2u\u00b71 = 2u = 2x."},
+{id:20,ch:2,chName:"Ch.2 Derivatives",q:"If y = (x+1)/x, then dy/dx =",opts:["\u22121/x\u00b2","(x+1)/x\u00b2","2/x\u00b2","(x\u00b2\u22121)/x\u00b2"],ans:0,exp:"y = 1 + x\u207b\u00b9, dy/dx = \u2212x\u207b\u00b2 = \u22121/x\u00b2."},
+{id:21,ch:3,chName:"Ch.3 Trig Derivatives",q:"d/dx (sin x\u00b3) =",opts:["cos x\u00b3","\u2212cos x\u00b3","3x cos x\u00b2","3x\u00b2 cos x\u00b3"],ans:3,exp:"Chain rule: cos(x\u00b3)\u00b73x\u00b2 = 3x\u00b2 cos x\u00b3."},
+{id:22,ch:3,chName:"Ch.3 Trig Derivatives",q:"d/dx cos(1/x) =",opts:["\u2212sin(1/x)","sin(1/x)","(1/x\u00b2)sin(1/x)","\u2212(1/x\u00b2)sin(1/x)"],ans:2,exp:"Chain rule: \u2212sin(1/x)\u00b7(\u22121/x\u00b2) = (1/x\u00b2)sin(1/x)."},
+{id:23,ch:3,chName:"Ch.3 Trig Derivatives",q:"d/dx (sin ax + cos ax) =",opts:["a cosx + a sinx","a cosx \u2212 a sinx","cos ax + sin ax","a cos ax \u2212 a sin ax"],ans:3,exp:"d/dx(sin ax) = a cos ax, d/dx(cos ax) = \u2212a sin ax. Sum = a cos ax \u2212 a sin ax."},
+{id:24,ch:3,chName:"Ch.3 Trig Derivatives",q:"d/dx (cosec 3x) =",opts:["\u2212cosec 3x cot 3x","\u22123 cosec 3x cot 3x","cot 3x","cosec 3x"],ans:1,exp:"d/dx(cosec u) = \u2212cosec u\u00b7cot u\u00b7(du/dx). With u=3x: \u22123 cosec 3x cot 3x."},
+{id:25,ch:3,chName:"Ch.3 Trig Derivatives",q:"d/dx (tan x\u00b2) =",opts:["2x sec\u00b2x\u00b2","sec\u00b2x\u00b2","sec x\u00b2","tan x\u00b2"],ans:0,exp:"Chain rule: sec\u00b2(x\u00b2)\u00b72x = 2x sec\u00b2x\u00b2."},
+{id:26,ch:3,chName:"Ch.3 Trig Derivatives",q:"d/dx tan(1/\u221ax) =",opts:["sec\u00b2(1/\u221ax)","cosec\u00b2(1/\u221ax)","(3/2\u221ax) sec\u00b2(1/\u221ax)","\u2212[1/(2x^(3/2))] sec\u00b2(1/\u221ax)"],ans:3,exp:"d/dx(1/\u221ax) = \u22121/(2x^(3/2)). Derivative = sec\u00b2(1/\u221ax)\u00b7(\u22121/(2x^(3/2)))."},
+{id:27,ch:3,chName:"Ch.3 Trig Derivatives",q:"d/dx (2 cos 3x) =",opts:["6 sin 3x","\u22126 sin 3x","\u22126 cos 3x","6 sec 3x"],ans:1,exp:"2\u00b7(\u2212sin(3x)\u00b73) = \u22126 sin 3x."},
+{id:28,ch:3,chName:"Ch.3 Trig Derivatives",q:"d/dx sin(\u221ax) =",opts:["cos(\u221ax)","\u2212cos(\u221ax)","[1/(2\u221ax)] cos(\u221ax)","\u2212[1/(2\u221ax)] cos(\u221ax)"],ans:2,exp:"Chain rule: cos(\u221ax)\u00b7[1/(2\u221ax)] = cos(\u221ax)/(2\u221ax)."},
+{id:29,ch:3,chName:"Ch.3 Trig Derivatives",q:"d/dx sec 3x =",opts:["3 sec 3x tan 3x","sec 3x tan 3x","3 sec 3x cot 3x","\u22123 sec 3x tan 3x"],ans:0,exp:"d/dx(sec u) = sec u tan u\u00b7(du/dx). With u=3x: 3 sec 3x tan 3x."},
+{id:30,ch:3,chName:"Ch.3 Trig Derivatives",q:"d/dx (sin\u207b\u00b9x) =",opts:["1/\u221a(x\u00b2\u22121)","1/[sin\u207b\u00b9x\u00b7\u221a(1\u2212x\u00b2)]","sin\u207b\u00b9x/\u221a(1\u2212x\u00b2)","1/\u221a(1\u2212x\u00b2)"],ans:3,exp:"Standard result: d/dx(sin\u207b\u00b9x) = 1/\u221a(1\u2212x\u00b2)."},
+{id:31,ch:4,chName:"Ch.4 Applied Differentiation",q:"For an increasing function, dy/dx is:",opts:["+ve","\u2212ve","zero","None"],ans:0,exp:"Increasing function \u2192 slope dy/dx must be positive."},
+{id:32,ch:4,chName:"Ch.4 Applied Differentiation",q:"For a decreasing function, dy/dx is:",opts:["+ve","\u2212ve","zero","None"],ans:1,exp:"Decreasing function \u2192 slope dy/dx must be negative."},
+{id:33,ch:4,chName:"Ch.4 Applied Differentiation",q:"If dy/dx changes from +ve to \u2212ve, it is:",opts:["maxima","minima","inflection","None"],ans:0,exp:"Slope positive\u2192negative \u2192 function peaked \u2192 MAXIMA."},
+{id:34,ch:4,chName:"Ch.4 Applied Differentiation",q:"If dy/dx changes from \u2212ve to +ve, it is:",opts:["maxima","minima","inflection","None"],ans:1,exp:"Slope negative\u2192positive \u2192 function bottomed out \u2192 MINIMA."},
+{id:35,ch:4,chName:"Ch.4 Applied Differentiation",q:"If dy/dx does NOT change sign at a zero, it is:",opts:["maxima","minima","inflection","None"],ans:2,exp:"No sign change \u2192 saddle/inflection point."},
+{id:36,ch:4,chName:"Ch.4 Applied Differentiation",q:"MAXIMUM if dy/dx changes from:",opts:["+ve to \u2212ve","\u2212ve to +ve","does not change","zero"],ans:0,exp:"Max = slope goes positive\u2192negative."},
+{id:37,ch:4,chName:"Ch.4 Applied Differentiation",q:"MINIMUM if dy/dx changes from:",opts:["+ve to \u2212ve","\u2212ve to +ve","does not change","zero"],ans:1,exp:"Min = slope goes negative\u2192positive."},
+{id:38,ch:4,chName:"Ch.4 Applied Differentiation",q:"If 2nd derivative is +ve at a point:",opts:["maximum","minimum","inflection","None"],ans:1,exp:"d\u00b2y/dx\u00b2 > 0 \u2192 concave UP \u2192 MINIMUM."},
+{id:39,ch:4,chName:"Ch.4 Applied Differentiation",q:"If 2nd derivative is \u2212ve at a point:",opts:["maximum","minimum","inflection","None"],ans:0,exp:"d\u00b2y/dx\u00b2 < 0 \u2192 concave DOWN \u2192 MAXIMUM."},
+{id:40,ch:4,chName:"Ch.4 Applied Differentiation",q:"MAXIMUM if 2nd derivative is:",opts:["+ve","\u2212ve","zero","None"],ans:1,exp:"Maximum requires d\u00b2y/dx\u00b2 < 0."},
+{id:41,ch:4,chName:"Ch.4 Applied Differentiation",q:"MINIMUM if 2nd derivative is:",opts:["+ve","\u2212ve","zero","None"],ans:0,exp:"Minimum requires d\u00b2y/dx\u00b2 > 0."},
+{id:42,ch:4,chName:"Ch.4 Applied Differentiation",q:"f(x) = x\u00b2 between \u22125 \u2264 x \u2264 \u22124 is:",opts:["increasing","decreasing","maximum","minimum"],ans:1,exp:"f(\u22125)=25, f(\u22124)=16. f drops \u2192 DECREASING."},
+{id:43,ch:5,chName:"Ch.5 Statistics",q:"Sum of all variables / number is:",opts:["Median","Arithmetic Mean","Mode","Geometric Mean"],ans:1,exp:"Arithmetic Mean = \u03a3x/n."},
+{id:44,ch:5,chName:"Ch.5 Statistics",q:"When n is odd, ((n+1)/2)th value is:",opts:["Mean","Mode","Median","Harmonic Mean"],ans:2,exp:"Median = middle value at position (n+1)/2."},
+{id:45,ch:5,chName:"Ch.5 Statistics",q:"x\u0303 = \u2113 + (h/f)(n/2 \u2212 c) is for:",opts:["Median for grouped data","Arithmetic Mean","Geometric Mean","Mode"],ans:0,exp:"Median formula for grouped/frequency data."},
+{id:46,ch:5,chName:"Ch.5 Statistics",q:"In x\u0303 = \u2113 + (h/f)(n/2 \u2212 c), \u2113 is:",opts:["class interval","lower class boundary of Median class","freq of Median class","cumulative freq before Median class"],ans:1,exp:"\u2113 = lower class boundary of the Median class."},
+{id:47,ch:5,chName:"Ch.5 Statistics",q:"In x\u0303 = \u2113 + (h/f)(n/2 \u2212 c), h is:",opts:["Total frequency","Lower boundary","Class interval","Frequency"],ans:2,exp:"h = class interval = width of each class."},
+{id:48,ch:5,chName:"Ch.5 Statistics",q:"In x\u0303 = \u2113 + (h/f)(n/2 \u2212 c), c is:",opts:["class interval","cumulative freq preceding Median class","total frequency","freq of Median class"],ans:1,exp:"c = cumulative frequency before the Median class."},
+{id:49,ch:5,chName:"Ch.5 Statistics",q:"Value occurring most frequently is:",opts:["Mean","Geometric Mean","Harmonic Mean","Mode"],ans:3,exp:"Mode = most frequent value."},
+{id:50,ch:5,chName:"Ch.5 Statistics",q:"\u2113 + [(fm\u2212f1)/((fm\u2212f1)(fm\u2212f2))] \u00d7 h is for:",opts:["Mode for grouped data","Median","Mean","Geometric Mean"],ans:0,exp:"Mode formula for grouped data."},
+{id:51,ch:5,chName:"Ch.5 Statistics",q:"Karl Pearson's relation for Mode:",opts:["Mode = 3 Median \u2212 4 Mean","Mode = 4 Median \u2212 3 Mean","Mode = 3 Median \u2212 2 Mean","Mode = 2 Median \u2212 3 Mean"],ans:2,exp:"Mode = 3 Median \u2212 2 Mean."},
+{id:52,ch:5,chName:"Ch.5 Statistics",q:"Standard Deviation formula:",opts:["\u03c3 = \u221a(\u03a3(x\u2212x\u0304)/n)","\u03c3 = \u221a(\u03a3(x\u00b2\u2212x)/n)","\u03c3 = \u03a3x/n","\u03c3 = \u221a(\u03a3(x\u2212x\u0304)\u00b2/n)"],ans:3,exp:"\u03c3 = \u221a(mean of squared deviations) = \u221a(\u03a3(x\u2212x\u0304)\u00b2/n)."},
+{id:53,ch:5,chName:"Ch.5 Statistics",q:"SD for grouped data:",opts:["\u221a(\u03a3f(x\u2212x\u0304)\u00b2/\u03a3f)","\u221a(\u03a3f(x\u2212x\u0304)/\u03a3f)","\u221a(\u03a3f(x\u00b2\u2212x)/\u03a3f)","\u221a(\u03a3f(x\u2212x\u0304\u00b2)/\u03a3f)"],ans:0,exp:"\u03c3 = \u221a(\u03a3f(x\u2212x\u0304)\u00b2/\u03a3f)."},
+{id:54,ch:6,chName:"Ch.6 Probability",q:"A process of obtaining an observation:",opts:["an experiment","Trial","outcome","an event"],ans:0,exp:"An experiment is any process that generates a result."},
+{id:55,ch:6,chName:"Ch.6 Probability",q:"A single performance of an experiment:",opts:["an event","Trial","outcome","sample space"],ans:1,exp:"One run of an experiment = a Trial."},
+{id:56,ch:6,chName:"Ch.6 Probability",q:"The result from an experiment:",opts:["sample space","an event","outcome","population"],ans:2,exp:"The result of one trial = an outcome."},
+{id:57,ch:6,chName:"Ch.6 Probability",q:"ALL possible outcomes:",opts:["population","an event","trial","sample space"],ans:3,exp:"Sample Space S = all possible outcomes."},
+{id:58,ch:6,chName:"Ch.6 Probability",q:"Each element of sample space:",opts:["trial","sample point","experiment","an event"],ans:1,exp:"Each outcome in S is a sample point."},
+{id:59,ch:6,chName:"Ch.6 Probability",q:"P(TAIL) from a perfect coin:",opts:["0","1/2","1","3/4"],ans:1,exp:"S={H,T}. P(Tail) = 1/2."},
+{id:60,ch:6,chName:"Ch.6 Probability",q:"Sample space of a die has how many elements?",opts:["4","3","6","1"],ans:2,exp:"Die: {1,2,3,4,5,6} \u2192 6 elements."},
+{id:61,ch:6,chName:"Ch.6 Probability",q:"P(specific number) on a die:",opts:["5/6","2/3","1/3","1/6"],ans:3,exp:"1 favorable / 6 total = 1/6."},
+{id:62,ch:6,chName:"Ch.6 Probability",q:"P(KING) from 52 cards:",opts:["1/13","1/26","1/14","1/52"],ans:0,exp:"4 kings / 52 = 1/13."},
+{id:63,ch:6,chName:"Ch.6 Probability",q:"P(SPADE) from 52 cards:",opts:["1/13","1/4","1/26","1/52"],ans:1,exp:"13 spades / 52 = 1/4."},
+{id:64,ch:7,chName:"Ch.7 Integration",q:"\u222bx\u00b3 dx =",opts:["x\u2074/4","x\u2074/3","3x\u00b2","4x\u2074"],ans:0,exp:"Power rule: \u222bx\u00b3dx = x\u2074/4 + C."},
+{id:65,ch:7,chName:"Ch.7 Integration",q:"\u222be\u00b2\u2e3b dx =",opts:["e\u00b2\u2e3b/2","e^(x\u00b2)/2","2e\u00b2\u2e3b","e^(2x+1)/2"],ans:0,exp:"\u222be^(ax)dx = e^(ax)/a. Here a=2."},
+{id:66,ch:7,chName:"Ch.7 Integration",q:"\u222b(cos x / sin x) dx =",opts:["ln|cos x|","ln|sin x|","ln|cot x|","cos\u00b2x/2"],ans:1,exp:"u=sinx, du=cosx dx. \u222bdu/u = ln|sin x| + C."},
+{id:67,ch:7,chName:"Ch.7 Integration",q:"\u222btan x \u00b7 sec\u00b2x dx =",opts:["ln|tan x|","tan\u00b2x/2","sec\u00b2x/3","sec x tan x"],ans:1,exp:"u=tanx, du=sec\u00b2x dx. \u222bu du = u\u00b2/2."},
+{id:68,ch:7,chName:"Ch.7 Integration",q:"\u222bx^(n+1) dx =",opts:["x^(n+1)/(n+2)","x^(n+2)/(n+2)","(n+1)x\u207f","x\u00b2/n"],ans:1,exp:"Add 1 to exponent, divide by new exponent."},
+{id:69,ch:7,chName:"Ch.7 Integration",q:"\u222b\u221ax dx =",opts:["(1/2)x^(1/2)","(2/3)x^(3/2)","x^(3/2)","1/(2\u221ax)"],ans:1,exp:"\u222bx^(1/2)dx = (2/3)x^(3/2) + C."},
+{id:70,ch:7,chName:"Ch.7 Integration",q:"\u222bsec x dx =",opts:["tan x","sec\u00b2x/2","ln|sec x + tan x|","sec x tan x"],ans:2,exp:"\u222bsec x dx = ln|sec x + tan x| + C."},
+{id:71,ch:7,chName:"Ch.7 Integration",q:"\u222b(ax + b) dx =",opts:["(ax+b)\u00b2/(2a)","(ax+b)\u00b2/2","ln(ax+b)","a(ax+b)"],ans:0,exp:"(ax+b)\u00b2/(2\u00b7a) + C."},
+{id:72,ch:7,chName:"Ch.7 Integration",q:"\u222b(a + x)/x dx =",opts:["a ln|x| + x","(ax+b)\u00b2/2","ln|x| + a","x + a"],ans:0,exp:"(a+x)/x = a/x + 1. \u222b = a\u00b7ln|x| + x + C."},
+{id:73,ch:7,chName:"Ch.7 Integration",q:"\u222b(cosec\u00b2x / cot x) dx =",opts:["\u2212ln|cot x|","ln|cot x|","cot\u00b2x/2","ln|cosec\u00b2x|"],ans:0,exp:"u=cotx, du=\u2212cosec\u00b2x dx. \u222b\u2212du/u = \u2212ln|cot x| + C."},
+{id:74,ch:8,chName:"Ch.8 Methods of Integration",q:"\u222b1/\u221a(1\u2212x\u00b2) dx =",opts:["sin\u207b\u00b9x","cos\u207b\u00b9x","sec\u207b\u00b9x","tan\u207b\u00b9x"],ans:0,exp:"\u222b1/\u221a(1\u2212x\u00b2) dx = sin\u207b\u00b9x + C."},
+{id:75,ch:8,chName:"Ch.8 Methods of Integration",q:"\u222b(\u22121)/\u221a(1\u2212x\u00b2) dx =",opts:["sin\u207b\u00b9x","cos\u207b\u00b9x","sec\u207b\u00b9x","\u221a(1\u2212x\u00b2)"],ans:1,exp:"= \u2212sin\u207b\u00b9x + C = cos\u207b\u00b9x + C."},
+{id:76,ch:8,chName:"Ch.8 Methods of Integration",q:"\u222be\u2e3b/(1 + e\u2e3b) dx =",opts:["1+e\u2e3b","ln(1+e\u2e3b)","e\u2e3b","(1+e\u2e3b)\u00b2/2"],ans:1,exp:"u=1+e\u2e3b, du=e\u2e3b dx. \u222bdu/u = ln(1+e\u2e3b) + C."},
+{id:77,ch:8,chName:"Ch.8 Methods of Integration",q:"\u222b(sec x tan x)/(3 + sec x) dx =",opts:["sec x + tan x","3 + sec x","ln(3 + sec x)","ln(sec x + tan x)"],ans:2,exp:"u=3+secx, du=secx tanx dx. \u222bdu/u = ln(3+secx) + C."},
+{id:78,ch:8,chName:"Ch.8 Methods of Integration",q:"\u222bx sin x dx =",opts:["\u2212x cos x + sin x","sin x","x + sin x","(x\u00b2/2) cos x"],ans:0,exp:"By parts: \u2212x cosx + sinx + C."},
+{id:79,ch:8,chName:"Ch.8 Methods of Integration",q:"\u222bsin\u2074x cos x dx =",opts:["sin\u2075x/5","sin\u2075x cos x/5","cos\u00b2x/2","\u2212sinx cosx"],ans:0,exp:"u=sinx, du=cosx dx. \u222bu\u2074du = u\u2075/5."},
+{id:80,ch:8,chName:"Ch.8 Methods of Integration",q:"\u222bx sec\u00b2x dx =",opts:["x tan x","x tan x + ln|sec x|","tan x","x tan x \u2212 ln|sec x|"],ans:1,exp:"By parts: x tanx + ln|secx| + C."},
+{id:81,ch:8,chName:"Ch.8 Methods of Integration",q:"\u222bxe\u2e3b dx =",opts:["xe\u2e3b + e\u2e3b","xe\u2e3b \u2212 e\u2e3b","e\u2e3b","(x\u00b2/2)e\u2e3b"],ans:1,exp:"By parts: xe\u2e3b \u2212 e\u2e3b + C."},
+{id:82,ch:8,chName:"Ch.8 Methods of Integration",q:"\u222b(ax + b)\u00b3 dx =",opts:["(ax+b)\u2074/(4a)","3(ax+b)\u00b2","(ax+b)\u00b3/(4a)","3a(ax+b)\u00b2"],ans:0,exp:"(ax+b)\u2074/(4a) + C."},
+{id:83,ch:8,chName:"Ch.8 Methods of Integration",q:"\u222bcosec x dx =",opts:["ln|cosec x \u2212 cot x|","ln|sec x|","ln|cosec x + cot x|","cos x"],ans:0,exp:"\u222bcosec x dx = ln|cosec x \u2212 cot x| + C."},
+{id:84,ch:9,chName:"Ch.9 Definite Integrals",q:"\u222b\u2080\u00b9 dx =",opts:["\u22121","0","1","2"],ans:2,exp:"[x]\u2080\u00b9 = 1 \u2212 0 = 1."},
+{id:85,ch:9,chName:"Ch.9 Definite Integrals",q:"\u222b\u2080^(pi/4) sec\u00b2x dx =",opts:["1","2","0","3"],ans:0,exp:"[tan x]\u2080^(pi/4) = 1 \u2212 0 = 1."},
+{id:86,ch:9,chName:"Ch.9 Definite Integrals",q:"Swapping limits gives:",opts:["\u222b\u2081\u1d47 f(x)dx","\u2212\u222b\u2081\u1d47 f(x)dx","\u00b1\u222b\u2081\u1d47 f(x)dx","\u222b\u1d47\u2081 f(x)dx"],ans:1,exp:"Swapping limits reverses the sign."},
+{id:87,ch:9,chName:"Ch.9 Definite Integrals",q:"\u222b\u2082\u00b3 2x/(x\u00b2+1) dx =",opts:["ln 2","ln 10 \u2212 ln 6","ln(x\u00b2+1)","ln 10 + ln 6"],ans:0,exp:"u=x\u00b2+1: [ln(x\u00b2+1)]\u2082\u00b3 = ln(10)\u2212ln(5) = ln 2."},
+{id:88,ch:9,chName:"Ch.9 Definite Integrals",q:"\u222b\u2081\u00b3 e\u00b2\u2e3b dx =",opts:["e\u2076\u2212e\u00b2","(1/2)(e\u2076\u2212e\u00b2)","e\u00b2\u2e3b/2","(1/2)(e\u2076+e\u00b2)"],ans:1,exp:"[e\u00b2\u2e3b/2]\u2081\u00b3 = (e\u2076\u2212e\u00b2)/2."},
+{id:89,ch:9,chName:"Ch.9 Definite Integrals",q:"\u222b\u2081\u00b2 3x\u00b2 dx =",opts:["7","8","6","9"],ans:0,exp:"[x\u00b3]\u2081\u00b2 = 8\u22121 = 7."},
+{id:90,ch:9,chName:"Ch.9 Definite Integrals",q:"\u222b\u2080\u00b9 1/(x\u00b2+1) dx =",opts:["pi/4","0","1","\u2212pi/4"],ans:0,exp:"[arctan x]\u2080\u00b9 = pi/4."},
+{id:91,ch:9,chName:"Ch.9 Definite Integrals",q:"\u222b_(pi/3)^(pi/2) cosec\u00b2x / cot x dx =",opts:["2","\u221a3","1/\u221a3","ln(1/\u221a3)"],ans:3,exp:"u=cotx: [\u2212ln|cot x|] = ln(1/\u221a3)."},
+{id:92,ch:9,chName:"Ch.9 Definite Integrals",q:"\u222b\u2080^(pi/2) cot x dx =",opts:["\u22121","1","0","pi/2"],ans:2,exp:"[ln|sin x|]\u2080^(pi/2) = 0 per book."},
+{id:93,ch:10,chName:"Ch.10 Differential Equations",q:"Equation with derivatives is:",opts:["Quadratic","Linear","Differential equation","Cubic"],ans:2,exp:"Contains derivatives."},
+{id:94,ch:10,chName:"Ch.10 Differential Equations",q:"Order of dy/dx + 2y = 0:",opts:["2","1","0","3"],ans:1,exp:"Highest derivative = 1st order."},
+{id:95,ch:10,chName:"Ch.10 Differential Equations",q:"Degree of d\u00b2y/dx\u00b2 + (dy/dx)\u00b3 + y = 0:",opts:["1","2","3","0"],ans:0,exp:"Power of highest order derivative = 1."},
+{id:96,ch:10,chName:"Ch.10 Differential Equations",q:"Solution of dy/dx = 1:",opts:["y = x","y = x + c","y = c","y = x\u00b2 + c"],ans:1,exp:"Integrate: y = x + c."},
+{id:97,ch:10,chName:"Ch.10 Differential Equations",q:"Solution of xdy + ydx = 0:",opts:["y = x","y = c/x","y = \u2212y","y = c"],ans:1,exp:"d(xy)=0 \u2192 xy=c \u2192 y=c/x."},
+{id:98,ch:10,chName:"Ch.10 Differential Equations",q:"Separable form of xdy + ydx = 0:",opts:["1/y dy = \u22121/x dx","1/y dy = 1/x dx","y dy = x dx","x dy = y dx"],ans:0,exp:"dy/y = \u2212dx/x."},
+{id:99,ch:10,chName:"Ch.10 Differential Equations",q:"y = ln x + c is solution of:",opts:["x dy = dx","y dy = x dx","dy = dx","x dy = y dx"],ans:0,exp:"dy/dx=1/x \u2192 x dy = dx."},
+{id:100,ch:10,chName:"Ch.10 Differential Equations",q:"Order of x(d\u00b2y/dx\u00b2) + dy/dx + y = 0:",opts:["1","3","0","2"],ans:3,exp:"Highest derivative = d\u00b2y/dx\u00b2 \u2192 order = 2."},
+{id:101,ch:10,chName:"Ch.10 Differential Equations",q:"y = Ce\u02e3 is solution of:",opts:["dy = x dx","dy = y dx","dy/dx = x","y dx = x dy"],ans:1,exp:"y=Ce\u02e3 \u2192 dy/dx=Ce\u02e3=y \u2192 dy=y dx."},
+{id:102,ch:10,chName:"Ch.10 Differential Equations",q:"Degree of x(dy/dx)\u00b2 + y(dy/dx)\u00b3 = 1:",opts:["1","3","2","0"],ans:1,exp:"Degree = highest power of dy/dx = 3."},
+{id:103,ch:11,chName:"Ch.11 Fourier Series",q:"a\u2080/2 + \u03a3(a\u207f cos nx + b\u207f sin nx) is:",opts:["Binomial series","Fourier series","Arithmetic series","Geometric series"],ans:1,exp:"This is the Fourier Series."},
+{id:104,ch:11,chName:"Ch.11 Fourier Series",q:"If f(\u2212x) = \u2212f(x), the function is:",opts:["even","odd","linear","constant"],ans:1,exp:"ODD: f(\u2212x) = \u2212f(x)."},
+{id:105,ch:11,chName:"Ch.11 Fourier Series",q:"If f(\u2212x) = f(x), the function is:",opts:["even","odd","linear","constant"],ans:0,exp:"EVEN: f(\u2212x) = f(x)."},
+{id:106,ch:11,chName:"Ch.11 Fourier Series",q:"In ODD function, coefficient a\u2080 is:",opts:["zero","1","\u22121","2"],ans:0,exp:"a\u2080 = 0 for odd functions."},
+{id:107,ch:11,chName:"Ch.11 Fourier Series",q:"In ODD function, coefficient a\u207f is:",opts:["zero","1","\u22121","2"],ans:0,exp:"a\u207f = 0 for odd functions."},
+{id:108,ch:11,chName:"Ch.11 Fourier Series",q:"In EVEN function, coefficient b\u207f is:",opts:["zero","1","\u22121","2"],ans:0,exp:"b\u207f = 0 for even functions."},
+{id:109,ch:11,chName:"Ch.11 Fourier Series",q:"Period of sin x:",opts:["pi","2pi","\u2212pi","\u22122pi"],ans:1,exp:"Period = 2pi."},
+{id:110,ch:11,chName:"Ch.11 Fourier Series",q:"Period of cos x:",opts:["pi","2pi","\u2212pi","\u22122pi"],ans:1,exp:"Period = 2pi."},
+{id:111,ch:11,chName:"Ch.11 Fourier Series",q:"f(x) is periodic if f(x) = f(----):",opts:["x \u00b1 T","\u00b1 x/T","\u00b1 xT","None"],ans:0,exp:"f(x+T) = f(x)."},
+{id:112,ch:11,chName:"Ch.11 Fourier Series",q:"If f(x) is EVEN, a\u2080 equals:",opts:["\u222b\u2080^pi f(x)dx","(2/pi)\u222b\u207b^pi f(x)dx","(2/pi)\u222b\u2080^pi f(x)dx","(1/pi)\u222b\u207b^pi f(x)dx"],ans:2,exp:"a\u2080 = (2/pi)\u222b\u2080^pi f(x)dx for even f."},
+{id:113,ch:12,chName:"Ch.12 Laplace Transform",q:"L{f(t)} =",opts:["\u222b\u2080\u221e f(t)e^(\u2212st) dt","\u222b\u2080\u221e f(t)e^(st) dt","\u222b\u2080\u221e f(t)e\u02eb dt","\u222b\u2080\u221e f(t)e\u02e6 dt"],ans:0,exp:"L{f(t)} = \u222b\u2080\u221e f(t)\u00b7e^(st) dt."},
+{id:114,ch:12,chName:"Ch.12 Laplace Transform",q:"L{1} =",opts:["1/s\u00b3","1/s\u00b2","1/s","\u22121/s"],ans:2,exp:"L{1} = 1/s."},
+{id:115,ch:12,chName:"Ch.12 Laplace Transform",q:"L{t} =",opts:["1/s","1/s\u00b2","1/s\u00b3","\u22121/s"],ans:1,exp:"L{t} = 1/s\u00b2."},
+{id:116,ch:12,chName:"Ch.12 Laplace Transform",q:"L{2} =",opts:["s/2","2/s\u00b2","2/s\u00b3","2/s"],ans:3,exp:"L{2} = 2/s."},
+{id:117,ch:12,chName:"Ch.12 Laplace Transform",q:"L{e\u02eb} =",opts:["1/(s\u22121)","1/s","s\u22121","s"],ans:0,exp:"L{e\u02eb} = 1/(s\u22121)."},
+{id:118,ch:12,chName:"Ch.12 Laplace Transform",q:"L{e\u02e3t} =",opts:["1/(s+a)","1/(s\u2212a)","s\u2212a","s+a"],ans:1,exp:"L{e\u02e3t} = 1/(s\u2212a)."},
+{id:119,ch:12,chName:"Ch.12 Laplace Transform",q:"L{e^(at)} =",opts:["1/(s+a)","1/(s\u2212a)","s\u2212a","s+a"],ans:0,exp:"L{e^(at)} = 1/(s+a)."},
+{id:120,ch:12,chName:"Ch.12 Laplace Transform",q:"L{sin \u03c9t} =",opts:["\u03c9/(s\u00b2+\u03c9\u00b2)","1/(s\u00b2+\u03c9\u00b2)","s/(s\u00b2+\u03c9\u00b2)","1/(s\u00b2\u2212\u03c9\u00b2)"],ans:0,exp:"L{sin \u03c9t} = \u03c9/(s\u00b2+\u03c9\u00b2)."},
+{id:121,ch:12,chName:"Ch.12 Laplace Transform",q:"L{t\u207f} =",opts:["n/s^(n+1)","n!/s^(n+1)","1/s^(n+1)","n!/s\u207f"],ans:1,exp:"L{t\u207f} = n!/s^(n+1)."},
+{id:122,ch:12,chName:"Ch.12 Laplace Transform",q:"L\u207b\u00b9(1/s) =",opts:["1","2","3","4"],ans:0,exp:"L\u207b\u00b9(1/s) = 1."},
+{id:123,ch:12,chName:"Ch.12 Laplace Transform",q:"L\u207b\u00b9(1/s\u00b2) =",opts:["1","t","t\u00b2","t/2"],ans:1,exp:"L\u207b\u00b9(1/s\u00b2) = t."},
+{id:124,ch:12,chName:"Ch.12 Laplace Transform",q:"s/(s\u00b2+\u03c9\u00b2) is inverse Laplace of:",opts:["sin \u03c9t","cos \u03c9t","sin(t/\u03c9)","cos(t/\u03c9)"],ans:1,exp:"L{cos \u03c9t} = s/(s\u00b2+\u03c9\u00b2)."},
+{id:125,ch:12,chName:"Ch.12 Laplace Transform",q:"\u03c9/(s\u00b2+\u03c9\u00b2) is inverse Laplace of:",opts:["sin \u03c9t","cos \u03c9t","sin(t/\u03c9)","cos(t/\u03c9)"],ans:0,exp:"L{sin \u03c9t} = \u03c9/(s\u00b2+\u03c9\u00b2)."},
+{id:126,ch:12,chName:"Ch.12 Laplace Transform",q:"1/(s\u00b2+1) is inverse Laplace of:",opts:["sin t","cos t","sin(1/t)","cos(1/t)"],ans:0,exp:"L{sin t} = 1/(s\u00b2+1)."},
+{id:127,ch:12,chName:"Ch.12 Laplace Transform",q:"s/(s\u00b2+1) is inverse Laplace of:",opts:["sin t","cos t","sin(1/t)","cos(1/t)"],ans:1,exp:"L{cos t} = s/(s\u00b2+1)."},
+{id:128,ch:12,chName:"Ch.12 Laplace Transform",q:"L\u207b\u00b9(1/(s\u22121)) =",opts:["e\u207b\u02eb","e\u00b2\u02eb","1/t","e\u02eb"],ans:3,exp:"L\u207b\u00b9(1/(s\u22121)) = e\u02eb."},
+{id:129,ch:12,chName:"Ch.12 Laplace Transform",q:"L\u207b\u00b9(1/(s+1)) =",opts:["e\u02eb","e\u00b2\u02eb","1/t","e\u207b\u02eb"],ans:3,exp:"L\u207b\u00b9(1/(s+1)) = e\u207b\u02eb."},
+];
+
+var CHAPTERS=[
+{id:0,name:"All Chapters"},
+{id:1,name:"Ch.1 Functions & Limits"},
+{id:2,name:"Ch.2 Derivatives"},
+{id:3,name:"Ch.3 Trig Derivatives"},
+{id:4,name:"Ch.4 Applied Diff."},
+{id:5,name:"Ch.5 Statistics"},
+{id:6,name:"Ch.6 Probability"},
+{id:7,name:"Ch.7 Integration"},
+{id:8,name:"Ch.8 Methods of Int."},
+{id:9,name:"Ch.9 Definite Integrals"},
+{id:10,name:"Ch.10 Diff. Equations"},
+{id:11,name:"Ch.11 Fourier Series"},
+{id:12,name:"Ch.12 Laplace Transform"},
+];
+
+var LABELS=["A","B","C","D"];
+var selChapter=0,doShuffle=false,started=false,questions=[],idx=0,chosen=null,score=0,wrongArr=[],done=false;
+
+function shuffle(a){var b=a.slice();for(var i=b.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=b[i];b[i]=b[j];b[j]=t}return b}
+
+function startQuiz(){
+var qs=selChapter===0?MCQ_DATA.slice():MCQ_DATA.filter(function(q){return q.ch===selChapter});
+if(doShuffle)qs=shuffle(qs);
+questions=qs;idx=0;chosen=null;score=0;wrongArr=[];done=false;started=true;render();
+}
+function reset(){started=false;done=false;idx=0;chosen=null;score=0;wrongArr=[];render()}
+function pick(i){
+if(chosen!==null)return;chosen=i;
+if(i===questions[idx].ans)score++;else wrongArr.push({q:questions[idx],chosen:i});
+render();
+}
+function next(){if(idx+1>=questions.length){done=true;render();return}idx++;chosen=null;render()}
+
+function render(){
+var el=document.getElementById("app");
+if(!started)renderHome(el);
+else if(done)renderDone(el);
+else renderQuiz(el);
+}
+
+function renderHome(el){
+var h='<div style="margin-bottom:32px;padding-top:16px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><div style="width:6px;height:28px;background:linear-gradient(180deg,#7c5af0,#5a6ef0);border-radius:3px"></div><h1>Math MCQ Practice</h1></div><p class="sub">129 questions across 12 chapters \u00b7 with explanations after each answer</p></div>';
+h+='<span class="lbl">Select Chapter</span><select onchange="selChapter=+this.value">';
+for(var i=0;i<CHAPTERS.length;i++){
+var c=CHAPTERS[i];
+var cnt=c.id===0?MCQ_DATA.length:MCQ_DATA.filter(function(q){return q.ch===c.id}).length;
+h+='<option value="'+c.id+'"'+(selChapter===c.id?" selected":"")+'>'+c.name+' ('+cnt+' questions)</option>';
+}
+h+='</select>';
+h+='<div class="trow"><button class="tbtn '+(doShuffle?"on":"off")+'" onclick="doShuffle=!doShuffle;render()"><div class="tknob"></div></button><span class="tlbl">Shuffle questions</span></div>';
+h+='<button class="btn" onclick="startQuiz()">Start Quiz \u2192</button>';
+h+='<div class="chGrid">';
+for(var i=1;i<CHAPTERS.length;i++){
+var c=CHAPTERS[i];
+var cnt=MCQ_DATA.filter(function(q){return q.ch===c.id}).length;
+h+='<div class="chCard'+(selChapter===c.id?" active":"")+'" onclick="selChapter='+c.id+';render()"><div class="chId">'+c.name.split(" ")[0]+' '+c.name.split(" ")[1]+'</div><div class="chCnt">'+cnt+' Qs</div></div>';
+}
+h+='</div>';
+el.innerHTML=h;
+}
+
+function renderQuiz(el){
+var q=questions[idx];
+var total=questions.length;
+var pct=Math.round(((idx+(chosen!==null?1:0))/total)*100);
+var h='<div class="topRow" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px"><span class="tag">'+q.chName+'</span><div style="display:flex;align-items:center;gap:12px"><span class="counter">'+(idx+1)+' / '+total+'</span><button class="btnSm" onclick="reset()">\u2715 Quit</button></div></div>';
+h+='<div class="bar"><div class="barFill" style="width:'+pct+'%"></div></div>';
+h+='<div class="qLabel">QUESTION '+(idx+1)+'</div><div class="qText">'+q.q+'</div>';
+for(var i=0;i<q.opts.length;i++){
+var state="idle";
+if(chosen!==null){if(i===q.ans)state="correct";else if(i===chosen)state="wrong";else state="reveal"}
+h+='<button class="opt '+state+'" onclick="pick('+i+')"><span class="optL">'+LABELS[i]+'</span>'+q.opts[i]+'</button>';
+}
+if(chosen!==null){
+h+='<div class="expBox"><div class="expLabel">'+(chosen===q.ans?"\u2713 Correct":"\u2717 Incorrect")+' \u2014 Explanation</div><div class="expText">'+q.exp+'</div></div>';
+h+='<div style="display:flex;justify-content:flex-end;padding-bottom:24px"><button class="btnPri" onclick="next()">'+(idx+1>=total?"See Results \u2192":"Next \u2192")+'</button></div>';
+}
+if(chosen===null){
+h+='<div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:24px;margin-top:8px"><span style="font-size:12px;color:#3a3a58">Pick an answer above</span><span style="font-size:12px;color:#3a3a58">Score: '+score+'/'+idx+'</span></div>';
+}
+el.innerHTML=h;
+}
+
+function renderDone(el){
+var total=questions.length;
+var pctScore=Math.round((score/total)*100);
+var fillColor=pctScore>=80?"#5af0a0":pctScore>=50?"#f0c050":"#f05080";
+var h='<div class="resultCard"><div style="font-size:11px;color:#6b6b88;margin-bottom:12px;letter-spacing:0.1em;text-transform:uppercase">Quiz Complete</div><div class="bigScore">'+score+'</div><div style="font-size:14px;color:#6b6b88;margin-top:4px">out of '+total+'</div><div class="pctBar"><div class="pctFill" style="width:'+pctScore+'%;background:linear-gradient(90deg,'+fillColor+','+fillColor+'99)"></div></div><div style="font-size:28px;font-weight:700;color:'+fillColor+'">'+pctScore+'%</div><div style="font-size:13px;color:#6b6b88;margin-top:4px">'+(pctScore>=80?"Solid. You know this.":pctScore>=50?"Almost there. Review the wrong ones.":"Keep drilling.")+'</div></div>';
+h+='<div class="row"><div class="statBox"><div class="statNum" style="color:#5af0a0">'+score+'</div><div style="font-size:11px;color:#6b6b88">Correct</div></div><div class="statBox"><div class="statNum" style="color:#f05080">'+wrongArr.length+'</div><div style="font-size:11px;color:#6b6b88">Wrong</div></div><div class="statBox"><div class="statNum" style="color:#7c5af0">'+pctScore+'%</div><div style="font-size:11px;color:#6b6b88">Score</div></div></div>';
+h+='<div class="row" style="margin-top:16px;margin-bottom:28px"><button class="btnPri" onclick="reset()" style="flex:1">\u2190 Back to Menu</button><button class="btn" onclick="startQuiz()" style="flex:1">Retry Same Chapter</button></div>';
+if(wrongArr.length>0){
+h+='<div class="sectionTitle">Wrong Answers Review ('+wrongArr.length+')</div>';
+for(var i=0;i<wrongArr.length;i++){
+var item=wrongArr[i];
+h+='<div class="wrongCard"><div class="wrongQ">Q'+(i+1)+'. '+item.q.q+'</div><div class="wrongCh">\u2717 Your answer: '+LABELS[item.chosen]+'. '+item.q.opts[item.chosen]+'</div><div class="wrongCr">\u2713 Correct: '+LABELS[item.q.ans]+'. '+item.q.opts[item.q.ans]+'</div><div class="wrongEx"> '+item.q.exp+'</div></div>';
+}
+}
+el.innerHTML=h;
+}
+
+render();
+</script>
+</body>
+</html>
